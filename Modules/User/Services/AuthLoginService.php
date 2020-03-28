@@ -5,6 +5,7 @@ namespace Modules\User\Services;
 use Illuminate\Routing\Controller;
 use JWTAuth;
 use ThrowException;
+use Log;
 
 /**
  * Class AuthLoginService

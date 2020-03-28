@@ -27,9 +27,9 @@ class AuthLoginController extends Controller {
 
     /**
      * @param Request $request
-     * @return \Illuminate\Contracts\Routing\ResponseFactory|Response
+     * @return Response
      */
-    public function __invoke(Request $request) {
+    public function __invoke(Request $request) : Response {
         $credentials = $request->only('email', 'password');
         $response = $this->authLoginService->getToken($credentials);
 
