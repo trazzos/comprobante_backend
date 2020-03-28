@@ -1,0 +1,26 @@
+{
+    "name": "nwidart/announcement",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Announcement\\Providers\\AnnouncementServiceProvider",
+                "Modules\\Announcement\\Providers\\RepositoryServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Announcement\\": ""
+        }
+    }
+}

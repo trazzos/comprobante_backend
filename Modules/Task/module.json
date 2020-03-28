@@ -1,0 +1,14 @@
+{
+    "name": "Task",
+    "alias": "task",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\Task\\Providers\\TaskServiceProvider",
+        "Modules\\Task\\Providers\\RepositoryServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

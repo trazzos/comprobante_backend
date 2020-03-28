@@ -1,0 +1,14 @@
+{
+    "name": "Stage",
+    "alias": "stage",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\Stage\\Providers\\StageServiceProvider",
+        "Modules\\Stage\\Providers\\RepositoryServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
