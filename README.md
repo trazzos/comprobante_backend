@@ -48,6 +48,9 @@ Go to c:/homestead and run (RUN THIS AS AN ADMINISTRATOR!!)
 ### cd c:/homestead
 ### vagrant up
 
+If you already have a homestead with folders don't forget to run provision too, or your folder won't point to the correct place
+### vagrant provision
+
 If you have issues running homestead try running
 ### bcdedit /set hypervisorlaunchtype off
 and restarting your machine
