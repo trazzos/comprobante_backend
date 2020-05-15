@@ -1,0 +1,14 @@
+{
+    "name": "Label",
+    "alias": "label",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\Label\\Providers\\LabelServiceProvider",
+        "Modules\\Label\\Providers\\RepositoryServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

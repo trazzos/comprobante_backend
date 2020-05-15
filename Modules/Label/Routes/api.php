@@ -13,8 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['prefix' => 'setting','middleware' => 'jwt.auth'], function() {
-    Route::get('awardType', 'AwardTypeGetController')->name('awardTypeGet');
-    Route::get('catalogue', 'CatalogueGetController')->name('catalogueGet');
-    Route::get('invoiceType', 'InvoiceTypeGetController')->name('invoiceTypeGet');
+Route::group(['prefix' => 'label', 'middleware' => 'jwt.auth'], function () {
+    Route::get('', 'LabelGetController')->name('labelGet');
+    Route::post('', 'LabelCreateController')->name('labelCreate');
+    Route::patch('', 'LabelPatchController')->name('labelPatch');
+    Route::delete('', 'LabelDeleteController')->name('labelDelete');
 });
