@@ -2,6 +2,7 @@
 
 namespace Modules\Invoice\Composites\Interfaces;
 use DOMDocument;
+use DOMElement;
 
 interface NodeLeafInterface {
     /**
@@ -9,5 +10,5 @@ interface NodeLeafInterface {
      * @return DOMDocument
      * Each concrete predicate must provide its rendering implementation
      */
-    public function render(DOMDocument $xml, $parentNode) : DOMDocument;
+    public function render(DOMDocument $xml, DOMElement $parentNode) : DOMDocument;
 }

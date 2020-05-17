@@ -14,11 +14,11 @@ use ThrowException;
 class NodeClassMapperService {
     /**
      * @param string $key
-     * @param array $node
+     * @param array $attributes
      * @return NodeGroupInterface
      * For each type of filter we need to have a concrete "leaf" instance.
      */
-    public function groupClassMapper(string $key, array $node) : NodeGroupInterface {
+    public function groupClassMapper(string $key, array $attributes) : NodeGroupInterface {
         //TODO validation
         //$this->predicateValidation($predicate);
         $namespace = 'Modules\Invoice\Composites\Groups\\';
@@ -32,16 +32,16 @@ class NodeClassMapperService {
             ThrowException::notFound('Node not implemented: '.$className);
         }
 
-        return new $className($node);
+        return new $className($key, $attributes);
     }
 
     /**
      * @param string $key
-     * @param array $node
+     * @param array $attributes
      * @return NodeLeafInterface
      * For each type of filter we need to have a concrete "leaf" instance.
      */
-    public function leafClassMapper(string $key, array $node) : NodeLeafInterface {
+    public function leafClassMapper(string $key, array $attributes) : NodeLeafInterface {
         //TODO validation
         //$this->predicateValidation($predicate);
         $namespace = 'Modules\Invoice\Composites\Leaves\\';
@@ -55,7 +55,7 @@ class NodeClassMapperService {
             ThrowException::notFound('Node not implemented: '.$className);
         }
 
-        return new $className($node);
+        return new $className($key, $attributes);
     }
 
     private function getClassName($key) {

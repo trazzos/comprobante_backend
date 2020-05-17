@@ -33,7 +33,7 @@ class InvoicePostController extends Controller {
     public function __invoke(InvoicePostValidationRequest $request) : JsonResponse {
         $nodes = $request->validated();
         $nodes = [
-            'cfdiComprobante' => [
+            'cfdi:Comprobante' => [
                 'children' => [
                     'cfdi:Emisor' => [
                         'attributes' => [
@@ -60,7 +60,7 @@ class InvoicePostController extends Controller {
                                         'children' => [
                                             'cfdi:Traslados' => [
                                                 'children' => [
-                                                    'cfdiTraslado' => [
+                                                    'cfdi:Traslado' => [
                                                         'attributes' => [
                                                             'Base' => "0.95",
                                                             'Impuesto' => "002",

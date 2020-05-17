@@ -2,22 +2,21 @@
 namespace Modules\Invoice\Composites\Groups;
 
 use DOMDocument;
+use DOMElement;
 use Modules\Invoice\Composites\Abstracts\NodeGroupAbstract;
 
 /**
  * Class CfdiConceptosGroup
- * @package Modules\Search\Composites\Filters
+ * @package Modules\Invoice\Composites\Groups
  */
 class CfdiConceptosGroup extends NodeGroupAbstract {
     /**
      * @param DOMDocument $xml
+     * @param DOMElement $parentNode
      * @return DOMDocument
      */
-    public function render(DOMDocument $xml, $parentNode): DOMDocument {
-        $node = $xml->createElement("cfdi:Conceptos");
-        $childNode = $parentNode->insertBefore($node);
-
-        $xml = parent::render($xml, $childNode);
-        return $xml;
+    public function render(DOMDocument $xml, DOMElement $parentNode): DOMDocument {
+        $childNode = $this->addChildNode($xml, $parentNode);
+        return parent::render($xml, $childNode);
     }
 }

@@ -4,24 +4,17 @@ namespace Modules\Invoice\Composites\Abstracts;
 use Modules\Invoice\Composites\Interfaces\NodeGroupInterface;
 use Modules\Invoice\Composites\Interfaces\NodeInterface;
 use DOMDocument;
+use DOMElement;
 
 /**
  * Class NodeGroupAbstract
- * @package Modules\Search\Composites
+ * @package Modules\Search\Composites\Abstracts
  */
 abstract class NodeGroupAbstract extends NodeAbstract implements NodeGroupInterface {
     /**
      * @var NodeInterface[]
      */
     protected $nodes = [];
-
-    /**
-     * NodeGroupAbstract constructor.
-     */
-    public function __construct() {
-        //TODO add properties for the grouped nodes here
-        parent::__construct();
-    }
 
     /**
      * @param NodeInterface $node
@@ -33,30 +26,17 @@ abstract class NodeGroupAbstract extends NodeAbstract implements NodeGroupInterf
 
     /**
      * @param DOMDocument $xml
+     * @param DOMElement $parentNode
      * @return DOMDocument
      * The base implementation of the Composite's rendering simply combines
      * results of all children. Concrete Composites will be able to reuse this
      * implementation in their real rendering implementations.
      */
-    public function render(DOMDocument $xml, $parentNode) : DOMDocument {
+    public function render(DOMDocument $xml, DOMElement $parentNode) : DOMDocument {
         foreach ($this->nodes as $key => $node) {
-            echo get_class($node);
-            echo PHP_EOL;
             $xml = $node->render($xml, $parentNode);
         }
 
         return $xml;
-    }
-
-    /**
-     * @param array $predicates
-     * @return callable
-     */
-    private function renderLeaves(array $predicates) : callable {
-        return function($query) use ($predicates) {
-            foreach ($predicates as $name => $predicate) {
-                $query = $predicate->render($query);
-            }
-        };
     }
 }
