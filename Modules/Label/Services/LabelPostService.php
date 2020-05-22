@@ -6,17 +6,17 @@ use Modules\Label\Models\Label;
 use Modules\Label\Repositories\Interfaces\LabelRepositoryInterface;
 
 /**
- * Class LabelCreateService
+ * Class LabelPostService
  * @package Modules\Label\Services
  */
-class LabelCreateService {
+class LabelPostService {
     /**
      * @var LabelRepositoryInterface
      */
     private $labelRepo;
 
     /**
-     * LabelCreateService constructor.
+     * LabelPostService constructor.
      * @param LabelRepositoryInterface $labelRepo
      */
     public function __construct(LabelRepositoryInterface $labelRepo) {

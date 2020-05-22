@@ -15,7 +15,7 @@ use Illuminate\Http\Request;
 
 Route::group(['prefix' => 'label', 'middleware' => 'jwt.auth'], function () {
     Route::get('', 'LabelGetController')->name('labelGet');
-    Route::post('', 'LabelCreateController')->name('labelCreate');
+    Route::post('', 'LabelPostController')->name('labelPost');
     Route::patch('', 'LabelPatchController')->name('labelPatch');
     Route::delete('', 'LabelDeleteController')->name('labelDelete');
 });

@@ -5,10 +5,10 @@ namespace Modules\Label\Http\Requests;
 use App\Http\Requests\Request;
 
 /**
- * Class LabelCreateValidationRequest
+ * Class LabelPostValidationRequest
  * @package Modules\Label\Http\Requests
  */
-class LabelCreateValidationRequest extends Request {
+class LabelPostValidationRequest extends Request {
     /**
      * Determine if the user is authorized to make this request.
      * @return bool
@@ -25,7 +25,7 @@ class LabelCreateValidationRequest extends Request {
     public function rules() {
         return [
             'name' => 'string|required',
-            'branch_id' => 'integer|required',
+            'branch_id' => 'integer|required|exists:branch,id',
             'invoice_type_id' => 'integer|required|exists:invoice_type,id',
             'current' => 'integer|required',
         ];

@@ -30,7 +30,7 @@ class LabelPatchController extends Controller {
      * @return JsonResponse
      */
     public function __invoke(LabelPatchValidationRequest $request) : JsonResponse {
-        $response = $this->labelPatchService->update($request->validated(),$request->get("id"));
+        $response = $this->labelPatchService->update($request->validated());
         return $this->handleAjaxJsonResponse($response, 'Registro actualizado.');
     }
 }

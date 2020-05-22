@@ -26,7 +26,7 @@ class LabelPatchValidationRequest extends Request {
         return [
             'id' => 'integer|required',
             'name' => 'string|required',
-            'branch_id' => 'integer|required',
+            'branch_id' => 'integer|required|exists:branch,id',
             'invoice_type_id' => 'integer|required|exists:invoice_type,id',
             'current' => 'integer|required',
         ];

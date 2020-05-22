@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class UserId
- * @package Modules\User\Services\Filters
+ * Class LabelId
+ * @package Modules\Label\Services\Filters
  */
 class LabelId extends FilterAbstract implements CriteriaInterface {
     /**

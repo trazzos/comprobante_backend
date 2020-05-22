@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompanyTable extends Migration
+class CreateBranchTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateCompanyTable extends Migration
      */
     public function up()
     {
-        Schema::create('company', function (Blueprint $table) {
+        Schema::create('branch', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->timestamp('activate_date');
-            $table->integer('stamp_tax_limit');
-            $table->string('taxpayer_id', 45);
-            $table->softDeletes();
+            $table->string("name");
+            $table->integer('company_id')->unsigned()->index();
+            $table->foreign('company_id')->references('id')->on('company');
+            $table->string('zip_code',10);
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ class CreateCompanyTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('company');
+        Schema::dropIfExists('branch');
     }
 }
