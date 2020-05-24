@@ -4,6 +4,7 @@ namespace Modules\Invoice\Services;
 
 use Modules\Invoice\Models\Invoice;
 use Modules\Invoice\Repositories\Interfaces\InvoiceRepositoryInterface;
+use Modules\User\Models\User;
 
 /**
  * Class InvoiceCreateService
@@ -11,23 +12,27 @@ use Modules\Invoice\Repositories\Interfaces\InvoiceRepositoryInterface;
  */
 class InvoiceCreateService {
     /**
-     * @var InvoiceRepositoryInterface
+     * @var XmlCreateService
      */
-    private $invoiceRepo;
+    private $xmlCreateService;
 
     /**
      * InvoiceCreateService constructor.
-     * @param InvoiceRepositoryInterface $invoiceRepo
+     * @param XmlCreateService $xmlCreateService
      */
-    public function __construct(InvoiceRepositoryInterface $invoiceRepo) {
-        $this->invoiceRepo = $invoiceRepo;
+    public function __construct(XmlCreateService $xmlCreateService) {
+        $this->xmlCreateService = $xmlCreateService;
     }
 
     /**
-     * @param array $data
+     * @param User $user
+     * @param array $nodes
      * @return Invoice|null
      */
-    public function create(array $data) : ?Invoice {
-        return $this->invoiceRepo->create($data);
+    public function create(User $user, array $nodes) : ?Invoice {
+        $xml = $this->xmlCreateService->createXml($user, $nodes);
+        echo $xml->saveXML();
+        return null;
+        //return $this->invoiceRepo->create($data);
     }
 }
