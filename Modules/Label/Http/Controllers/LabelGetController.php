@@ -32,6 +32,6 @@ class LabelGetController extends Controller {
     public function __invoke(LabelGetValidationRequest $request) : JsonResponse {
         $filters = $request->validated();
         $response = $this->labelGetService->list($filters);
-        return $this->handleAjaxJsonResponse($response);
+        return $this->handleAjaxJsonResponse($response, "Registros encontrados");
     }
 }

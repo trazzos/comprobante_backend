@@ -39,6 +39,7 @@ class LabelGetService {
         }
         $labels = $this->labelRepo->paginate($data['per_page']);
         $labels->load('invoiceType');
+        $labels->load('branch');
         $this->labelRepo->resetRepository();
 
         if(!$labels) {

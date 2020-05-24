@@ -1,15 +1,15 @@
 <?php
 
-namespace Modules\Label\Models;
+namespace Modules\Branch\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Label
- * @package Modules\Label\Models
+ * Class Branch
+ * @package Modules\Branch\Models
  */
-class Label extends Model {
+class Branch extends Model {
     use SoftDeletes;
 
     /**
@@ -17,7 +17,7 @@ class Label extends Model {
      *
      * @var string
      */
-    protected $table = 'label';
+    protected $table = 'branch';
 
     /**
      * The attributes that are mass assignable.
@@ -26,11 +26,11 @@ class Label extends Model {
      */
     protected $guarded = [];
 
-    public function invoiceType() {
-        return $this->belongsTo('\Modules\Setting\Models\InvoiceType');
+    public function company() {
+        return $this->belongsTo('\Modules\Company\Models\Company');
     }
-    public function branch() {
-        return $this->belongsTo('\Modules\Branch\Models\Branch');
+    public function label() {
+        return $this->hasMany('\Modules\Label\Models\Label');
     }
 
 }

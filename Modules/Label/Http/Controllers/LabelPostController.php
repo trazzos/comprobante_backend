@@ -32,6 +32,6 @@ class LabelPostController extends Controller {
     public function __invoke(LabelPostValidationRequest $request) : JsonResponse {
         $data = $request->validated();
         $response = $this->labelPostService->create($data);
-        return $this->handleAjaxJsonResponse($response);
+        return $this->handleAjaxJsonResponse($response, "Registro guardado");
     }
 }

@@ -32,6 +32,6 @@ class LabelDeleteController extends Controller {
     public function __invoke(LabelDeleteValidationRequest $request) : JsonResponse {
         $response = $this->labelDeleteService->delete($request->get("id"));
 
-        return $this->handleAjaxJsonResponse($response);
+        return $this->handleAjaxJsonResponse($response,"Registro eliminado");
     }
 }
