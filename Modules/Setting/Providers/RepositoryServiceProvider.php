@@ -17,5 +17,6 @@ class RepositoryServiceProvider extends ServiceProvider {
      */
     public function register() {
         $this->app->bind(Interfaces\AwardTypeRepositoryInterface::class, Implementation\AwardTypeRepository::class);
+        $this->app->bind(Interfaces\InvoiceTypeRepositoryInterface::class, Implementation\InvoiceTypeRepository::class);
     }
 }

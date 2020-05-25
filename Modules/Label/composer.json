@@ -1,0 +1,26 @@
+{
+    "name": "nwidart/label",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Label\\Providers\\LabelServiceProvider",
+                "Modules\\Label\\Providers\\RepositoryServiceProvider"
+            ],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Label\\": ""
+        }
+    }
+}
