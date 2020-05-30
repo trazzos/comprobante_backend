@@ -2,6 +2,8 @@
 
 namespace Modules\Label\Services;
 
+use App\Services\Abstracts\CrudPostAbstract;
+use Illuminate\Database\Eloquent\Model;
 use Modules\Label\Models\Label;
 use Modules\Label\Repositories\Interfaces\LabelRepositoryInterface;
 
@@ -9,26 +11,21 @@ use Modules\Label\Repositories\Interfaces\LabelRepositoryInterface;
  * Class LabelPostService
  * @package Modules\Label\Services
  */
-class LabelPostService {
-    /**
-     * @var LabelRepositoryInterface
-     */
-    private $labelRepo;
-
+class LabelPostService extends CrudPostAbstract {
     /**
      * LabelPostService constructor.
      * @param LabelRepositoryInterface $labelRepo
      */
     public function __construct(LabelRepositoryInterface $labelRepo) {
-        $this->labelRepo = $labelRepo;
+        $this->repo = $labelRepo;
     }
 
     /**
      * @param array $data
-     * @return Label|null
+     * @return Model|Label|null
      */
-    public function create(array $data) : ? Label {
-        $lab =  $this->labelRepo->create($data);
-        return $lab->load('invoiceType');
+    public function create(array $data) : ?Label {
+        $data = parent::create($data);
+        return $data->load('invoiceType');
     }
 }
