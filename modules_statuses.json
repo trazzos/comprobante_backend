@@ -3,6 +3,5 @@
     "User": true,
     "Invoice": true,
     "Setting": true,
-    "Label": true,
-    "Test": true
+    "Label": true
 }
