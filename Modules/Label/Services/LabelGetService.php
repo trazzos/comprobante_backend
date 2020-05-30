@@ -2,50 +2,31 @@
 
 namespace Modules\Label\Services;
 
+use App\Services\Abstracts\CrudGetService;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Modules\Label\Repositories\Interfaces\LabelRepositoryInterface;
-use ThrowException;
-use Filter;
-use Sort;
 
 /**
  * Class LabelGetService
  * @package Modules\Label\Services
  */
-class LabelGetService {
-    /**
-     * @var LabelRepositoryInterface
-     */
-    private $labelRepo;
-
+class LabelGetService extends CrudGetService {
     /**
      * LabelGetService constructor.
      * @param LabelRepositoryInterface $labelRepo
      */
     public function __construct(LabelRepositoryInterface $labelRepo) {
-        $this->labelRepo = $labelRepo;
+        $this->repo = $labelRepo;
     }
+
     /**
      * @param array $data
      * @return LengthAwarePaginator|null
      */
     public function list(array $data) : ?LengthAwarePaginator {
-        if(isset($data['predicates'])) {
-            Filter::apply(__NAMESPACE__, $this->labelRepo, $data['predicates']);
-        }
+        $response = parent::list($data);
+        $response->load('invoiceType');
 
-        if(isset($data['sorts'])) {
-            Sort::apply(__NAMESPACE__, $this->labelRepo, $data['sorts']);
-        }
-        $labels = $this->labelRepo->paginate($data['per_page']);
-        $labels->load('invoiceType');
-        $labels->load('branch');
-        $this->labelRepo->resetRepository();
-
-        if(!$labels) {
-            ThrowException::notFound();
-        }
-
-        return $labels;
+        return $response;
     }
 }
