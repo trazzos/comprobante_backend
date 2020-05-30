@@ -2,35 +2,30 @@
 
 namespace Modules\Label\Services;
 
-use Modules\Label\Repositories\Interfaces\LabelRepositoryInterface;
+use App\Services\Abstracts\CrudPatchAbstract;
 use Modules\Label\Models\Label;
-use Modules\User\Models\User;
-use ThrowException;
+use Modules\Label\Repositories\Interfaces\LabelRepositoryInterface;
 
 /**
  * Class LabelPatchService
  * @package Modules\Label\Services
  */
-class LabelPatchService {
-    /**
-     * @var LabelRepositoryInterface
-     */
-    private $labelRepo;
-
+class LabelPatchService extends CrudPatchAbstract {
     /**
      * LabelPatchService constructor.
      * @param LabelRepositoryInterface $labelRepo
      */
     public function __construct(LabelRepositoryInterface $labelRepo) {
-        $this->labelRepo = $labelRepo;
+        $this->repo = $labelRepo;
     }
+
     /**
-     * @param User $user
      * @param array $data
      * @return Label|null
+     * An example of overriding the method
      */
     public function update(array $data) : ?Label {
-        $lab =  $this->labelRepo->updateAndReturn($data, $data["id"]);
-        return $lab->load('invoiceType');
+        $label = parent::update($data);
+        return $label->load('invoiceType');
     }
 }

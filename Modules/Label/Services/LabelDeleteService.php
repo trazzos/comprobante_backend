@@ -2,31 +2,19 @@
 
 namespace Modules\Label\Services;
 
+use App\Services\Abstracts\CrudDeleteAbstract;
 use Modules\Label\Repositories\Interfaces\LabelRepositoryInterface;
 
 /**
  * Class LabelDeleteService
  * @package Modules\Label\Services
  */
-class LabelDeleteService {
-    /**
-     * @var LabelRepositoryInterface
-     */
-    private $labelRepo;
-
+class LabelDeleteService extends CrudDeleteAbstract {
     /**
      * LabelDeleteService constructor.
      * @param LabelRepositoryInterface $labelRepo
      */
     public function __construct(LabelRepositoryInterface $labelRepo) {
-        $this->labelRepo = $labelRepo;
-    }
-
-    /**
-     * @param $id
-     * @return false|true
-     */
-    public function delete($id): ? bool {
-        return $this->labelRepo->delete($id);
+        $this->repo = $labelRepo;
     }
 }
