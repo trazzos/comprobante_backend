@@ -20,7 +20,6 @@ abstract class CrudPostAbstract {
      * @return Model|null
      */
     public function create(array $data) : ?Model {
-        $data =  $this->repo->create($data);
-        return $data;
+        return $this->repo->create($data);
     }
 }

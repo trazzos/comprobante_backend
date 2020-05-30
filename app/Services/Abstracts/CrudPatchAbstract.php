@@ -21,7 +21,6 @@ abstract class CrudPatchAbstract {
      * @return Label|null
      */
     public function update(array $data) : ?Model {
-        $data =  $this->repo->updateAndReturn($data, $data["id"]);
-        return $data;
+        return $this->repo->updateAndReturn($data, $data["id"]);
     }
 }

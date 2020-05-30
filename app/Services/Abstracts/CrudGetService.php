@@ -25,7 +25,7 @@ abstract class CrudGetService {
     public function list(array $data) : ?LengthAwarePaginator {
         if(isset($data['predicates'])) {
             Filter::apply(__NAMESPACE__, $this->repo, $data['predicates']);
-        }co
+        }
 
         if(isset($data['sorts'])) {
             Sort::apply(__NAMESPACE__, $this->repo, $data['sorts']);
