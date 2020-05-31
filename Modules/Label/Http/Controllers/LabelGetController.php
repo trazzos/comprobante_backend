@@ -12,10 +12,11 @@ use Modules\Label\Services\LabelGetService;
  * @package Modules\Label\Http\Controllers
  */
 class LabelGetController extends Controller {
+
     /**
-     * @var $labelGetService
+     * @var LabelGetService $labelGetService
      */
-    private $labelGetService;
+    private LabelGetService $labelGetService;
 
     /**
      * LabelGetController constructor.

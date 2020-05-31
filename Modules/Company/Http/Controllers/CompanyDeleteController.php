@@ -12,10 +12,11 @@ use Modules\Company\Services\CompanyDeleteService;
  * @package Modules\Company\Http\Controllers
  */
 class CompanyDeleteController extends Controller {
+
     /**
-     * @var $companyDeleteService
+     * @var CompanyDeleteService $companyDeleteService
      */
-    private $companyDeleteService;
+    private CompanyDeleteService $companyDeleteService;
 
     /**
      * CompanyDeleteController constructor.

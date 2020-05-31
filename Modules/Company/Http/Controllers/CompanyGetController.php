@@ -12,10 +12,11 @@ use Modules\Company\Services\CompanyGetService;
  * @package Modules\Company\Http\Controllers
  */
 class CompanyGetController extends Controller {
+
     /**
-     * @var $companyGetService
+     * @var CompanyGetService $companyGetService
      */
-    private $companyGetService;
+    private CompanyGetService $companyGetService;
 
     /**
      * CompanyGetController constructor.
@@ -31,7 +32,7 @@ class CompanyGetController extends Controller {
      */
     public function __invoke(CompanyGetValidationRequest $request) : JsonResponse {
         $filters = $request->validated();
-        $response = $this->companyGetService->list($filters); //TODO temporary
+        $response = $this->companyGetService->list($filters);
         return $this->handleAjaxJsonResponse($response);
     }
 }

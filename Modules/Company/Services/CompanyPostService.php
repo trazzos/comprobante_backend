@@ -2,17 +2,17 @@
 
 namespace Modules\Company\Services;
 
-use App\Services\Abstracts\CrudDeleteAbstract;
+use App\Services\Abstracts\CrudPostAbstract;
 use Modules\Company\Repositories\Interfaces\CompanyRepositoryInterface;
 
 /**
- * Class CompanyDeleteService
+ * Class CompanyPostService
  * @package Modules\Company\Services
  */
-class CompanyDeleteService extends CrudDeleteAbstract {
+class CompanyPostService extends CrudPostAbstract {
 
     /**
-     * CompanyDeleteService constructor.
+     * CompanyPostService constructor.
      * @param CompanyRepositoryInterface $companyRepo
      */
     public function __construct(CompanyRepositoryInterface $companyRepo) {

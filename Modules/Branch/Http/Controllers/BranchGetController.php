@@ -13,9 +13,9 @@ use Modules\Branch\Services\BranchGetService;
  */
 class BranchGetController extends Controller {
     /**
-     * @var $branchGetService
+     * @var BranchGetService $branchGetService
      */
-    private $branchGetService;
+    private BranchGetService $branchGetService;
 
     /**
      * BranchGetController constructor.

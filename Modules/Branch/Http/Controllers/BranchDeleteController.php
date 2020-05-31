@@ -13,9 +13,9 @@ use Modules\Branch\Services\BranchDeleteService;
  */
 class BranchDeleteController extends Controller {
     /**
-     * @var $branchDeleteService
+     * @var BranchDeleteService $branchDeleteService
      */
-    private $branchDeleteService;
+    private BranchDeleteService $branchDeleteService;
 
     /**
      * BranchDeleteController constructor.
@@ -31,7 +31,6 @@ class BranchDeleteController extends Controller {
      */
     public function __invoke(BranchDeleteValidationRequest $request) : JsonResponse {
         $response = $this->branchDeleteService->delete($request->get("id"));
-
-        return $this->handleAjaxJsonResponse($response);
+        return $this->handleAjaxJsonResponse($response, 'Registro eliminado');
     }
 }

@@ -8,7 +8,10 @@ use Modules\Setting\Services\InvoiceTypeGetService;
 
 class InvoiceTypeGetController extends Controller
 {
-    private $invoiceTypeGetService;
+    /*
+     * @var InvoiceTypeGetService $invoiceTypeGetService
+     */
+    private InvoiceTypeGetService $invoiceTypeGetService;
 
     /**
      * InvoiceTypeGetController constructor.

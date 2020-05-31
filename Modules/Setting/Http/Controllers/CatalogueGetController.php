@@ -9,7 +9,10 @@ use Modules\Setting\Services\CatalogueGetService;
 
 class CatalogueGetController extends Controller
 {
-    private $catalogueGetService;
+    /*
+     * @var CatalogueGetService $catalogueGetService
+     */
+    private CatalogueGetService $catalogueGetService;
 
     /**
      * CatalogueGetController constructor.

@@ -10,9 +10,9 @@ use Illuminate\Support\Collection;
  */
 class AwardTypeGetService {
     /**
-     * @var AwardTypeRepositoryInterface
+     * @var AwardTypeRepositoryInterface $awardTypeRepo
      */
-    private $awardTypeRepo;
+    private AwardTypeRepositoryInterface $awardTypeRepo;
 
     /**
      * AwardTypeGetService constructor.

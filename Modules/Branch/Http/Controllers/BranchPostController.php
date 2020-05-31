@@ -13,9 +13,9 @@ use Modules\Branch\Services\BranchPostService;
  */
 class BranchPostController extends Controller {
     /**
-     * @var $branchPostService
+     * @var BranchPostService $branchPostService
      */
-    private $branchPostService;
+    private BranchPostService $branchPostService;
 
     /**
      * BranchPostController constructor.
@@ -32,6 +32,6 @@ class BranchPostController extends Controller {
     public function __invoke(BranchPostValidationRequest $request) : JsonResponse {
         $data = $request->validated();
         $response = $this->branchPostService->create($data);
-        return $this->handleAjaxJsonResponse($response);
+        return $this->handleAjaxJsonResponse($response, 'Registro guardado');
     }
 }

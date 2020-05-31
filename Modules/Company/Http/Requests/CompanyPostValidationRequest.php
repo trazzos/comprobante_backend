@@ -9,6 +9,7 @@ use App\Http\Requests\Request;
  * @package Modules\Company\Http\Requests
  */
 class CompanyPostValidationRequest extends Request {
+
     /**
      * Determine if the user is authorized to make this request.
      * @return bool
@@ -26,7 +27,6 @@ class CompanyPostValidationRequest extends Request {
         return [
             'name' => 'string|required',
             'taxpayer_id' => 'string|required|min:12|max:13',
-            'stamp_tax_limit' => 'integer|required|min:1'
         ];
     }
 }

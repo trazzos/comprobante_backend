@@ -3,12 +3,14 @@
 namespace Modules\Company\Http\Requests;
 
 use App\Http\Requests\Request;
+use Config;
 
 /**
  * Class CompanyGetValidationRequest
  * @package Modules\Company\Http\Requests
  */
 class CompanyGetValidationRequest extends Request {
+
     /**
      * Determine if the user is authorized to make this request.
      * @return bool
@@ -23,6 +25,6 @@ class CompanyGetValidationRequest extends Request {
      * @return array
      */
     public function rules() {
-        return \Config::get('validation.default_http_get');
+        return Config::get('validation.default_http_get');
     }
 }

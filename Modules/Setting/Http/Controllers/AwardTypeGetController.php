@@ -8,7 +8,10 @@ use Modules\Setting\Services\AwardTypeGetService;
 
 class AwardTypeGetController extends Controller
 {
-    private $awardTypeGetService;
+    /*
+     * @var AwardTypeGetService $awardTypeGetService
+     */
+    private AwardTypeGetService $awardTypeGetService;
 
     /**
      * AwardTypeGetController constructor.

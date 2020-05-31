@@ -10,9 +10,9 @@ use Illuminate\Support\Collection;
  */
 class InvoiceTypeGetService {
     /**
-     * @var InvoiceTypeRepositoryInterface
+     * @var InvoiceTypeRepositoryInterface $invoiceTypeRepo
      */
-    private $invoiceTypeRepo;
+    private InvoiceTypeRepositoryInterface $invoiceTypeRepo;
 
     /**
      * InvoiceTypeGetService constructor.

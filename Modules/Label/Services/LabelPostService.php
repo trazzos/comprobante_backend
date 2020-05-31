@@ -26,6 +26,8 @@ class LabelPostService extends CrudPostAbstract {
      */
     public function create(array $data) : ?Label {
         $data = parent::create($data);
-        return $data->load('invoiceType');
+        $data->load('invoiceType');
+        $data->load('branch');
+        return $data;
     }
 }

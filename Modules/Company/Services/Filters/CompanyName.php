@@ -13,9 +13,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class CompanyName extends FilterAbstract implements CriteriaInterface {
     /**
-     * @var array
+     * @var array $predicate
      */
-    protected $predicate;
+    protected array $predicate;
 
     /**
      * @param array $predicate

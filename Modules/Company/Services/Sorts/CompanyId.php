@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace Modules\Company\Services\Sorts;
 
 use App\Abstracts\SortAbstract;
@@ -13,9 +14,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class CompanyId extends SortAbstract implements CriteriaInterface {
     /**
-     * @var array
+     * @var array $sort
      */
-    protected $sort;
+    protected array $sort;
 
     /**
      * @param array $sort

@@ -12,10 +12,11 @@ use Modules\Label\Services\LabelPostService;
  * @package Modules\Label\Http\Controllers
  */
 class LabelPostController extends Controller {
+
     /**
-     * @var $labelPostService
+     * @var LabelPostService $labelPostService
      */
-    private $labelPostService;
+    private LabelPostService $labelPostService;
 
     /**
      * LabelPostController constructor.

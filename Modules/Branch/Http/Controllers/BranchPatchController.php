@@ -6,6 +6,7 @@ use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Modules\Branch\Http\Requests\BranchPatchValidationRequest;
 use Modules\Branch\Services\BranchPatchService;
+use Modules\Label\Services\LabelPatchService;
 
 /**
  * Class BranchPatchController
@@ -13,16 +14,16 @@ use Modules\Branch\Services\BranchPatchService;
  */
 class BranchPatchController extends Controller {
     /**
-     * @var $labelPatchService
+     * @var BranchPatchService $branchPatchService
      */
-    private $labelPatchService;
+    private BranchPatchService $branchPatchService;
 
     /**
      * BranchPatchController constructor.
-     * @param BranchPatchService $labelPatchService
+     * @param BranchPatchService $branchPatchService
      */
-    public function __construct(BranchPatchService $labelPatchService) {
-        $this->labelPatchService = $labelPatchService;
+    public function __construct(BranchPatchService $branchPatchService) {
+        $this->branchPatchService = $branchPatchService;
     }
 
     /**
@@ -30,7 +31,7 @@ class BranchPatchController extends Controller {
      * @return JsonResponse
      */
     public function __invoke(BranchPatchValidationRequest $request) : JsonResponse {
-        $response = $this->labelPatchService->update($request->validated());
+        $response = $this->branchPatchService->update($request->validated());
         return $this->handleAjaxJsonResponse($response, 'Registro actualizado.');
     }
 }

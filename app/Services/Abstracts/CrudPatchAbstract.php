@@ -4,7 +4,6 @@ namespace App\Services\Abstracts;
 
 use App\Repositories\Interfaces\RepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
-use Modules\Label\Models\Label;
 
 /**
  * Class CrudPatchAbstract
@@ -18,7 +17,7 @@ abstract class CrudPatchAbstract {
 
     /**
      * @param array $data
-     * @return Label|null
+     * @return Model|null
      */
     public function update(array $data) : ?Model {
         return $this->repo->updateAndReturn($data, $data["id"]);

@@ -21,12 +21,14 @@ class LabelPatchService extends CrudPatchAbstract {
 
     /**
      * @param array $data
-     * @return Label|null
+     * @return Model|Label|null
      * An example of overriding the method, if you don't need to "load" anything else you don't
      * need to override it
      */
     public function update(array $data) : ?Label {
         $label = parent::update($data);
-        return $label->load('invoiceType');
+        $label->load('invoiceType');
+        $label->load('branch');
+        return $label;
     }
 }
