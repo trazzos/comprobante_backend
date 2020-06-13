@@ -19,6 +19,7 @@ class CreateBranchTable extends Migration
             $table->integer('company_id')->unsigned()->index();
             $table->foreign('company_id')->references('id')->on('company');
             $table->string('zip_code',10);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -5,6 +5,7 @@ namespace Modules\Label\Http\Controllers;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Modules\Label\Http\Requests\LabelDeleteValidationRequest;
+use Modules\Label\Models\Label;
 use Modules\Label\Services\LabelDeleteService;
 
 /**
@@ -12,10 +13,11 @@ use Modules\Label\Services\LabelDeleteService;
  * @package Modules\Label\Http\Controllers
  */
 class LabelDeleteController extends Controller {
+
     /**
-     * @var $labelDeleteService
+     * @var LabelDeleteService $labelDeleteService
      */
-    private $labelDeleteService;
+    private LabelDeleteService $labelDeleteService;
 
     /**
      * LabelDeleteController constructor.
@@ -32,6 +34,6 @@ class LabelDeleteController extends Controller {
     public function __invoke(LabelDeleteValidationRequest $request) : JsonResponse {
         $response = $this->labelDeleteService->delete($request->get("id"));
 
-        return $this->handleAjaxJsonResponse($response);
+        return $this->handleAjaxJsonResponse($response,"Registro eliminado");
     }
 }

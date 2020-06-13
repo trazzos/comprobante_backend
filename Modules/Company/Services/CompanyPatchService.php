@@ -2,6 +2,8 @@
 
 namespace Modules\Company\Services;
 
+use App\Services\Abstracts\CrudPatchAbstract;
+use Illuminate\Database\Eloquent\Model;
 use Modules\Company\Models\Company;
 use Modules\Company\Repositories\Interfaces\CompanyRepositoryInterface;
 
@@ -9,27 +11,23 @@ use Modules\Company\Repositories\Interfaces\CompanyRepositoryInterface;
  * Class CompanyPatchService
  * @package Modules\Company\Services
  */
-class CompanyPatchService {
-    /**
-     * @var CompanyRepositoryInterface
-     */
-    private $companyRepo;
+class CompanyPatchService extends CrudPatchAbstract {
 
     /**
      * CompanyPatchService constructor.
      * @param CompanyRepositoryInterface $companyRepo
      */
     public function __construct(CompanyRepositoryInterface $companyRepo) {
-        $this->companyRepo = $companyRepo;
+        $this->repo = $companyRepo;
     }
 
     /**
-     * @param $data information to update
-     * @param $id register identifier that will be updated
-     * @return false|true
+     * @param array $data
+     * @return Model|Company|null
      */
-    public function update(array $data, $id) : ?Company {
-        $company = $this->companyRepo->updateAndReturn($data,$id);
-        return $company;
+    public function update(array $data) : ?Company {
+        $response =  parent::update($data);
+        $response->load('branch');
+        return $response;
     }
 }

@@ -12,10 +12,11 @@ use Modules\Label\Services\LabelPostService;
  * @package Modules\Label\Http\Controllers
  */
 class LabelPostController extends Controller {
+
     /**
-     * @var $labelPostService
+     * @var LabelPostService $labelPostService
      */
-    private $labelPostService;
+    private LabelPostService $labelPostService;
 
     /**
      * LabelPostController constructor.
@@ -32,6 +33,6 @@ class LabelPostController extends Controller {
     public function __invoke(LabelPostValidationRequest $request) : JsonResponse {
         $data = $request->validated();
         $response = $this->labelPostService->create($data);
-        return $this->handleAjaxJsonResponse($response);
+        return $this->handleAjaxJsonResponse($response, "Registro guardado");
     }
 }

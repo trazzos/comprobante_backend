@@ -9,6 +9,7 @@ use App\Http\Requests\Request;
  * @package Modules\Company\Http\Requests
  */
 class CompanyDeleteValidationRequest extends Request {
+
     /**
      * Determine if the user is authorized to make this request.
      * @return bool

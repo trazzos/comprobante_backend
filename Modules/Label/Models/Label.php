@@ -29,5 +29,8 @@ class Label extends Model {
     public function invoiceType() {
         return $this->belongsTo('\Modules\Setting\Models\InvoiceType');
     }
+    public function branch() {
+        return $this->belongsTo('\Modules\Branch\Models\Branch');
+    }
 
 }

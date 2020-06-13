@@ -26,7 +26,7 @@ class LabelGetService extends CrudGetService {
     public function list(array $data) : ?LengthAwarePaginator {
         $response = parent::list($data);
         $response->load('invoiceType');
-
+        $response->load('branch');
         return $response;
     }
 }

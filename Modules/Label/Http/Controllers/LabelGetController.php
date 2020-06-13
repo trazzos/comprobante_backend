@@ -12,10 +12,11 @@ use Modules\Label\Services\LabelGetService;
  * @package Modules\Label\Http\Controllers
  */
 class LabelGetController extends Controller {
+
     /**
-     * @var $labelGetService
+     * @var LabelGetService $labelGetService
      */
-    private $labelGetService;
+    private LabelGetService $labelGetService;
 
     /**
      * LabelGetController constructor.
@@ -32,6 +33,6 @@ class LabelGetController extends Controller {
     public function __invoke(LabelGetValidationRequest $request) : JsonResponse {
         $filters = $request->validated();
         $response = $this->labelGetService->list($filters);
-        return $this->handleAjaxJsonResponse($response);
+        return $this->handleAjaxJsonResponse($response, "Registros encontrados");
     }
 }

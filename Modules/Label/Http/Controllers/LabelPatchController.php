@@ -12,10 +12,11 @@ use Modules\Label\Services\LabelPatchService;
  * @package Modules\Label\Http\Controllers
  */
 class LabelPatchController extends Controller {
+
     /**
-     * @var $labelPatchService
+     * @var LabelPatchService $labelPatchService
      */
-    private $labelPatchService;
+    private LabelPatchService $labelPatchService;
 
     /**
      * LabelPatchController constructor.

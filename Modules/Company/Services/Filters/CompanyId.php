@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace Modules\Company\Services\Filters;
 
 use App\Abstracts\FilterAbstract;
@@ -13,9 +14,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class CompanyId extends FilterAbstract implements CriteriaInterface {
     /**
-     * @var array
+     * @var array $predicate
      */
-    protected $predicate;
+    protected  array $predicate;
 
     /**
      * @param array $predicate
