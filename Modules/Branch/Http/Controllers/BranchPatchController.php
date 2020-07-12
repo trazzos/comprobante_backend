@@ -6,7 +6,6 @@ use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Modules\Branch\Http\Requests\BranchPatchValidationRequest;
 use Modules\Branch\Services\BranchPatchService;
-use Modules\Label\Services\LabelPatchService;
 
 /**
  * Class BranchPatchController

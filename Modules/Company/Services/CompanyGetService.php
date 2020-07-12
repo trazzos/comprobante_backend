@@ -17,6 +17,7 @@ class CompanyGetService extends CrudGetService {
      */
     public function __construct(CompanyRepositoryInterface $companyRepo) {
         $this->repo = $companyRepo;
+        $this->nameSpace = __NAMESPACE__;
     }
 
     /**

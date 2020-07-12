@@ -17,6 +17,7 @@ class LabelGetService extends CrudGetService {
      */
     public function __construct(LabelRepositoryInterface $labelRepo) {
         $this->repo = $labelRepo;
+        $this->nameSpace = __NAMESPACE__;
     }
 
     /**

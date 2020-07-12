@@ -7,6 +7,7 @@ use App\Facades\Sort;
 use App\Facades\ThrowException;
 use App\Repositories\Interfaces\RepositoryInterface;
 use Illuminate\Pagination\LengthAwarePaginator;
+use PhpParser\Node\Scalar\String_;
 
 /**
  * Class CrudGetService
@@ -18,17 +19,22 @@ abstract class CrudGetService {
      */
     protected RepositoryInterface $repo;
 
+    /*
+     * @var string $nameSpace
+     */
+    protected string $nameSpace;
+
     /**
      * @param array $data
      * @return LengthAwarePaginator|null
      */
     public function list(array $data) : ?LengthAwarePaginator {
         if(isset($data['predicates'])) {
-            Filter::apply(__NAMESPACE__, $this->repo, $data['predicates']);
+            Filter::apply($this->nameSpace, $this->repo, $data['predicates']);
         }
 
         if(isset($data['sorts'])) {
-            Sort::apply(__NAMESPACE__, $this->repo, $data['sorts']);
+            Sort::apply($this->nameSpace, $this->repo, $data['sorts']);
         }
 
         $labels = $this->repo->paginate($data['per_page']);
@@ -37,7 +43,6 @@ abstract class CrudGetService {
         if(!$labels) {
             ThrowException::notFound();
         }
-
         return $labels;
     }
 }
