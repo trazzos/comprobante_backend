@@ -29,7 +29,7 @@ class BranchPatchService extends CrudPatchAbstract {
      * @return Model|Branch|null
      */
     public function update(array $data) : ?Branch {
-        $data = $this->normalizeData($data, Auth::getUser());
+        $data = $this->normalizeData($data, Auth::user());
         $response =  parent::update($data);
         $response->load('company');
         $response->load('label');
