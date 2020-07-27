@@ -6,7 +6,7 @@ use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Modules\Branch\Http\Requests\BranchPostValidationRequest;
 use Modules\Branch\Services\BranchPostService;
-
+use Auth;
 /**
  * Class BranchPostController
  * @package Modules\Branch\Http\Controllers
@@ -31,7 +31,7 @@ class BranchPostController extends Controller {
      */
     public function __invoke(BranchPostValidationRequest $request) : JsonResponse {
         $data = $request->validated();
-        $response = $this->branchPostService->create($data);
+        $response = $this->branchPostService->create(Auth::user(), $data);
         return $this->handleAjaxJsonResponse($response, 'Registro guardado');
     }
 }

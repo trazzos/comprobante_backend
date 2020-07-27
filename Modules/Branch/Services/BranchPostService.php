@@ -27,9 +27,9 @@ class BranchPostService extends CrudPostAbstract {
      * @param array $data
      * @return Model|Branch|null
      */
-    public function create(array $data) : ?Branch {
-        $data = $this->normalizeData($data, Auth::user());
-        $response = parent::create($data);
+    public function create(User $user, array $data) : ?Branch {
+        $data = $this->normalizeData($user, $data);
+        $response = parent::create($user, $data);
         $response->load('company');
         $response->load('label');
 
@@ -40,7 +40,7 @@ class BranchPostService extends CrudPostAbstract {
      * @param array $data
      * @return array;
      */
-    public function normalizeData(array $data, User $user) :array {
+    private function normalizeData(User $user, array $data) :array {
         $extra = [
             'user_id' => $user->user_id,
             'company_id' => $user->company_id

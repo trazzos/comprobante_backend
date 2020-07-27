@@ -3,8 +3,10 @@
 namespace Modules\Label\Services;
 
 use App\Services\Abstracts\CrudPatchAbstract;
+use Illuminate\Database\Eloquent\Model;
 use Modules\Label\Models\Label;
 use Modules\Label\Repositories\Interfaces\LabelRepositoryInterface;
+use Modules\User\Models\User;
 
 /**
  * Class LabelPatchService
@@ -22,11 +24,9 @@ class LabelPatchService extends CrudPatchAbstract {
     /**
      * @param array $data
      * @return Model|Label|null
-     * An example of overriding the method, if you don't need to "load" anything else you don't
-     * need to override it
      */
-    public function update(array $data) : ?Label {
-        $label = parent::update($data);
+    public function update(User $user, array $data) : ?Label {
+        $label = parent::update($user, $data);
         $label->load('invoiceType');
         $label->load('branch');
         return $label;

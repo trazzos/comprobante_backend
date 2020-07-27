@@ -6,7 +6,7 @@ use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Modules\Branch\Http\Requests\BranchPatchValidationRequest;
 use Modules\Branch\Services\BranchPatchService;
-
+use Auth;
 /**
  * Class BranchPatchController
  * @package Modules\Branch\Http\Controllers
@@ -30,7 +30,7 @@ class BranchPatchController extends Controller {
      * @return JsonResponse
      */
     public function __invoke(BranchPatchValidationRequest $request) : JsonResponse {
-        $response = $this->branchPatchService->update($request->validated());
+        $response = $this->branchPatchService->update(Auth::user(), $request->validated());
         return $this->handleAjaxJsonResponse($response, 'Registro actualizado.');
     }
 }
