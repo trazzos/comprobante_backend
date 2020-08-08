@@ -21,13 +21,18 @@ Route::group(['prefix' => 'user', "middleware" => 'jwt.auth'], function() {
 
 Route::group(['prefix' => 'auth'], function() {
     Route::post('login', 'AuthLoginController')->name('authLogin');
+    Route::post('register', 'Auth\AuthRegisterController')->name('authRegister');
 
-    Route::group(['middleware' => 'jwt.auth'], function(){
+    Route::group(['middleware' => 'jwt.auth'], function() {
         Route::get('user', 'AuthUserController')->name('authUser');
         Route::post('logout', 'AuthLogoutController')->name('authLogout');
+        Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
     });
 
     Route::group(['middleware' => 'jwt.refresh'], function(){
         Route::get('refresh', 'AuthRefreshController')->name('authRefresh');
     });
+
+    Route::post('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
+
 });

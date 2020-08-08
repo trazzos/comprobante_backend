@@ -26,6 +26,13 @@ class Branch extends Model {
      */
     protected $guarded = [];
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['name', 'company_id', 'zip_code', 'user_id'];
+
     public function company() {
         return $this->belongsTo('\Modules\Company\Models\Company');
     }
