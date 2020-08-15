@@ -6,6 +6,7 @@ use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Modules\Label\Http\Requests\LabelPostValidationRequest;
 use Modules\Label\Services\LabelPostService;
+use Auth;
 
 /**
  * Class LabelPostController
@@ -32,7 +33,7 @@ class LabelPostController extends Controller {
      */
     public function __invoke(LabelPostValidationRequest $request) : JsonResponse {
         $data = $request->validated();
-        $response = $this->labelPostService->create($data);
+        $response = $this->labelPostService->create(Auth::user(), $data);
         return $this->handleAjaxJsonResponse($response, "Registro guardado");
     }
 }

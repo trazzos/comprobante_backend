@@ -73,4 +73,12 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims() {
         return [];
     }
+
+    /*
+     * Get company to which belongs to the user
+     * @return Company
+     */
+    public function company() {
+        return $this->belongsTo('\Modules\Company\Models\Company');
+    }
 }

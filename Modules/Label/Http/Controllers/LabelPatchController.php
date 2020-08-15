@@ -6,6 +6,7 @@ use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Modules\Label\Http\Requests\LabelPatchValidationRequest;
 use Modules\Label\Services\LabelPatchService;
+use Auth;
 
 /**
  * Class LabelPatchController
@@ -31,7 +32,7 @@ class LabelPatchController extends Controller {
      * @return JsonResponse
      */
     public function __invoke(LabelPatchValidationRequest $request) : JsonResponse {
-        $response = $this->labelPatchService->update($request->validated());
+        $response = $this->labelPatchService->update(Auth::user(), $request->validated());
         return $this->handleAjaxJsonResponse($response, 'Registro actualizado.');
     }
 }

@@ -6,6 +6,7 @@ use App\Services\Abstracts\CrudPostAbstract;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Label\Models\Label;
 use Modules\Label\Repositories\Interfaces\LabelRepositoryInterface;
+use Modules\User\Models\User;
 
 /**
  * Class LabelPostService
@@ -24,10 +25,10 @@ class LabelPostService extends CrudPostAbstract {
      * @param array $data
      * @return Model|Label|null
      */
-    public function create(array $data) : ?Label {
-        $data = parent::create($data);
-        $data->load('invoiceType');
-        $data->load('branch');
-        return $data;
+    public function create(User $user, array $data) : ?Label {
+        $label = parent::create($user, $data);
+        $label->load('invoiceType');
+        $label->load('branch');
+        return $label;
     }
 }

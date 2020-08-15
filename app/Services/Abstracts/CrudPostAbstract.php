@@ -4,6 +4,7 @@ namespace App\Services\Abstracts;
 
 use App\Repositories\Interfaces\RepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
+use Modules\User\Models\User;
 
 /**
  * Class CrudPostAbstract
@@ -19,7 +20,7 @@ abstract class CrudPostAbstract {
      * @param array $data
      * @return Model|null
      */
-    public function create(array $data) : ?Model {
+    public function create(User $user, array $data) : ?Model {
         return $this->repo->create($data);
     }
 }

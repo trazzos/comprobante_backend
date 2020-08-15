@@ -6,6 +6,7 @@ use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Modules\Company\Http\Requests\CompanyPostValidationRequest;
 use Modules\Company\Services\CompanyPostService;
+use Auth;
 
 /**
  * Class CompanyPostController
@@ -32,7 +33,7 @@ class CompanyPostController extends Controller {
      */
     public function __invoke(CompanyPostValidationRequest $request) : JsonResponse {
         $data = $request->validated();
-        $response = $this->companyPostService->create($data);
+        $response = $this->companyPostService->create(Auth::user(), $data);
         return $this->handleAjaxJsonResponse($response);
     }
 }

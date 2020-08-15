@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['prefix' => 'branch', 'middelware' => 'jwt:auth' ], function() {
+Route::group(['prefix' => 'branch', 'middleware' => 'jwt.auth' ], function() {
     Route::get('', 'BranchGetController')->name('branchGet');
     Route::post('', 'BranchPostController')->name('branchPost');
     Route::patch('', 'BranchPatchController')->name('branchPatch');

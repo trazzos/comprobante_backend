@@ -4,6 +4,8 @@ namespace Modules\Company\Http\Requests;
 
 use App\Http\Requests\Request;
 use Config;
+use Auth;
+use Modules\User\Models\User;
 
 /**
  * Class CompanyGetValidationRequest
@@ -26,5 +28,22 @@ class CompanyGetValidationRequest extends Request {
      */
     public function rules() {
         return Config::get('validation.default_http_get');
+    }
+
+    /*
+     * @return void
+     */
+    protected function prepareForValidation() :void {
+       if($this->user()->role !== User::ROLE_ADMIN) {
+           $companyPredicates = [
+               'name' => 'company_id',
+               'comparison' => 'equals',
+               'attribute' => 'company.id',
+               'value' => $this->user()->company_id,
+           ];
+           $currentPredicates = $this->input()['predicates'] ?? [];
+           array_push($currentPredicates, $companyPredicates);
+           $this->merge(['predicates'=> $currentPredicates]);
+        }
     }
 }

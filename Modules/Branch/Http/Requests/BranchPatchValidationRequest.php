@@ -26,7 +26,6 @@ class BranchPatchValidationRequest extends Request {
         return [
             'id' => 'integer|required',
             'name' => 'string|required',
-            'company_id' => 'integer|required|exists:company,id',
             'zip_code' => 'string|required|',
         ];
     }

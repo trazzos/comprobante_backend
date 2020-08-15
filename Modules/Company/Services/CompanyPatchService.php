@@ -6,6 +6,7 @@ use App\Services\Abstracts\CrudPatchAbstract;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Company\Models\Company;
 use Modules\Company\Repositories\Interfaces\CompanyRepositoryInterface;
+use Modules\User\Models\User;
 
 /**
  * Class CompanyPatchService
@@ -25,8 +26,8 @@ class CompanyPatchService extends CrudPatchAbstract {
      * @param array $data
      * @return Model|Company|null
      */
-    public function update(array $data) : ?Company {
-        $response =  parent::update($data);
+    public function update(User $user, array $data) : ?Company {
+        $response =  parent::update($user, $data);
         $response->load('branch');
         return $response;
     }

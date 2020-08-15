@@ -6,6 +6,7 @@ use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Modules\Company\Http\Requests\CompanyPatchValidationRequest;
 use Modules\Company\Services\CompanyPatchService;
+use Auth;
 
 /**
  * Class CompanyPatchController
@@ -31,7 +32,7 @@ class CompanyPatchController extends Controller {
      * @return JsonResponse
      */
     public function __invoke(CompanyPatchValidationRequest $request) : JsonResponse {
-        $response = $this->companyPatchService->update($request->validated());
+        $response = $this->companyPatchService->update(Auth::user(), $request->validated());
         return $this->handleAjaxJsonResponse($response, 'Empresa actualizada con exito.');
     }
 }

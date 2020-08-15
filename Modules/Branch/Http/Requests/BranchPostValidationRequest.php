@@ -3,6 +3,7 @@
 namespace Modules\Branch\Http\Requests;
 
 use App\Http\Requests\Request;
+use Auth;
 
 /**
  * Class BranchPostValidationRequest
@@ -25,7 +26,6 @@ class BranchPostValidationRequest extends Request {
     public function rules() {
         return [
             'name' => 'string|required',
-            'company_id' => 'integer|required|exists:company,id',
             'zip_code' => 'string|required|',
         ];
     }

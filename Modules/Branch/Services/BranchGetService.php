@@ -17,6 +17,7 @@ class BranchGetService extends CrudGetService {
      */
     public function __construct(BranchRepositoryInterface $branchRepo) {
         $this->repo = $branchRepo;
+        $this->nameSpace = __NAMESPACE__;
     }
 
     /**
