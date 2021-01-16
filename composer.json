@@ -2,6 +2,12 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The Laravel Framework.",
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/Askedio/laravel-soft-cascade"
+        }
+    ],
     "keywords": [
         "framework",
         "laravel"
@@ -9,23 +15,24 @@
     "license": "MIT",
     "require": {
         "php": "^7.4",
+        "ext-dom": "*",
         "ext-json": "*",
-        "ext-dom":  "*",
-        "askedio/laravel-soft-cascade": "^7.0",
+        "askedio/laravel-soft-cascade": "master",
         "fideloper/proxy": "^4.0",
         "fruitcake/laravel-cors": "^1.0",
-        "laravel/framework": "^7.0",
+        "laravel/framework": "^8.0",
+        "laravel/legacy-factories": "^1.1",
         "laravel/tinker": "^2.0",
-        "nwidart/laravel-modules": "^7.1",
-        "tymon/jwt-auth": "1.0.0"
+        "nwidart/laravel-modules": "^8.0",
+        "tymon/jwt-auth": "1.0.2"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.6",
         "facade/ignition": "^2.4",
         "fzaninotto/faker": "^1.9",
         "mockery/mockery": "^1.0",
-        "nunomaduro/collision": "^4.1",
-        "phpunit/phpunit": "^8.5"
+        "nunomaduro/collision": "^5.0",
+        "phpunit/phpunit": "^9.0"
     },
     "config": {
         "optimize-autoloader": true,
