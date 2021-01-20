@@ -34,10 +34,10 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      * The attributes that are protected.
      *
      * @var array
-     * No queremos que el campo id pueda ser cambiado por lo que lo agregamos al arreglo de guarded
+     *
      */
     protected $guarded = [
-        'id'
+        'id',
     ];
 
     /**
@@ -63,9 +63,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password', 'role', 'user_id','company_id'
-    ];
+    protected $fillable = [];
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.

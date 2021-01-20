@@ -1,11 +1,13 @@
 <?php
 
 
-namespace Modules\User\Http\Controllers\Auth;
+namespace Modules\User\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Modules\User\Services\GetUserService;
 use Illuminate\Http\Request;
+use Modules\User\Models\User;
+use phpDocumentor\Reflection\Types\Boolean;
 
 
 class VerificationController extends Controller{
@@ -35,12 +37,8 @@ class VerificationController extends Controller{
      * @return JsonResponse
      */
     public function verify(Request $request) : JsonResponse {
-        $response = $this->getUserService->info($request->route('id'));
-        if ($response->hasVerifiedEmail()) {
-            return $this->handleAjaxJsonResponse($response, 'El correo ya se encuentra verificado.');
-        }
-        $response->markEmailAsVerified();
-        return $this->handleAjaxJsonResponse($response,'Correo verificado');
+        $user = $this->getUserService->info($request->route('id'));
+        return $this->handleVerify($user);
     }
 
     /**
@@ -50,11 +48,25 @@ class VerificationController extends Controller{
      * @return JsonResponse
      */
     public function resend(Request $request): JsonResponse {
-        if ($request->user()->hasVerifiedEmail()) {
-            return $this->handleAjaxJsonResponse(null, 'El correo ya se encuentra verificado.');
-        }
+        $user = $request->user();
+        return $this->handleVerify($user, true);
+    }
 
-        $request->user()->sendEmailVerificationNotification();
-        return $this->handleAjaxJsonResponse(null, 'Correo de verificacion reenviado');
+    /**
+     * handle verify
+     *
+     * @param  User $user
+     * @param  Boolean $resend
+     * @return JsonResponse
+     */
+    private function handleVerify(User $user, $resend = false) : JsonResponse {
+
+        if ($user->hasVerifiedEmail()) {
+            $message = 'El correo ya se encuentra verificado';
+        } else {
+            $resend ? $user->sendEmailVerificationNotification() :  $user->markEmailAsVerified();
+            $message =  $resend ? 'Correo de verificacion reenviado' : 'Correo verificado';
+        }
+        return $this->handleAjaxJsonResponse($user,$message);
     }
 }

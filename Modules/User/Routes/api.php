@@ -12,27 +12,25 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::group(['prefix' => 'user', "middleware" => 'jwt.auth'], function() {
+Route::prefix('user')->name('user')->middleware('jwt.auth')->group(function() {
     Route::get('', 'UserGetController')->name('userGet');
     Route::post('', 'UserPostController')->name('userPost');
     Route::patch('', 'UserPatchController')->name('userPatch');
     Route::delete('', 'UserDeleteController')->name('userDelete');
 });
 
-Route::group(['prefix' => 'auth'], function() {
-    Route::post('login', 'AuthLoginController')->name('authLogin');
-    Route::post('register', 'Auth\AuthRegisterController')->name('authRegister');
+Route::prefix('auth')->name('auth.')->group(function() {
+    Route::post('login', 'AuthLoginController')->name('login');
+    Route::post('register', 'AuthRegisterController')->name('register');
 
-    Route::group(['middleware' => 'jwt.auth'], function() {
-        Route::get('user', 'AuthUserController')->name('authUser');
-        Route::post('logout', 'AuthLogoutController')->name('authLogout');
-        Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
+    Route::middleware('jwt.auth')->group(function() {
+        Route::get('user', 'AuthUserController')->name('user');
+        Route::post('logout', 'AuthLogoutController')->name('logout');
+        Route::post('email/resend', 'VerificationController@resend')->name('resend');
+    });
+    Route::middleware('jwt.refresh')->group(function () {
+        Route::get('refresh', 'AuthRefreshController')->name('refresh');
     });
 
-    Route::group(['middleware' => 'jwt.refresh'], function(){
-        Route::get('refresh', 'AuthRefreshController')->name('authRefresh');
-    });
-
-    Route::post('email/verify/{id}', 'Auth\VerificationController@verify')->name('verification.verify');
-
+    Route::post('email/verify/{id}', 'VerificationController@verify')->name('verify');
 });

@@ -25,14 +25,14 @@ class Company extends Model {
      *
      * @var array
      */
-    protected $guarded = [];
+    protected $guarded = ['id'];
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['name', 'taxpayer_id'];
+    protected $fillable = [];
 
     public function branch() {
         return $this->hasMany('\Modules\Branch\Models\Branch');

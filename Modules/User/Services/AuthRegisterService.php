@@ -3,12 +3,13 @@
 namespace Modules\User\Services;
 
 use Auth;
+use Event;
 use Exception;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Support\Facades\DB;
 use Modules\Company\Repositories\Interfaces\CompanyRepositoryInterface;
 use Modules\Branch\Repositories\Interfaces\BranchRepositoryInterface;
 use Modules\User\Models\User;
+use Modules\Company\Models\Company;
 use Modules\User\Repositories\Interfaces\UserRepositoryInterface;
 use JWTAuth;
 
@@ -49,37 +50,60 @@ class AuthRegisterService  {
      * @return string|false
      */
     public function register(array $data) {
-        try {
-              DB::beginTransaction();
-              $company =  $this->companyRepo->create($data);
 
-              $extraDataBranch = [
-                  'company_id' => $company->id,
-                  'name' => 'matriz',
-                  'user_id' => null,
-              ];
-              $branchData = array_merge($data, $extraDataBranch);
-              $this->branchRepo->create($branchData);
+        $dataCompany =$this->normalizeDataCompany($data);
+        $company =  $this->companyRepo->create($dataCompany);
 
-              $extraDataUser = [
-                  'company_id' => $company->id,
-                  'role' => User::ROLE_USER,
-                  'user_id' => null,
-              ];
-              $userData = array_merge($data, $extraDataUser);
-              $user = $this->userRepo->create($userData);
+        $dataBranch =$this->normalizeDataBranch($company, $data);
+        $this->branchRepo->create($dataBranch);
 
-        } catch (\Exception $e){
-            DB::rollback();
-            throw  $e;
-        }
-        DB::commit();
+        $dataUser =$this->normalizeDataUser($company, $data);
+        $user = $this->userRepo->create($dataUser);
 
-        try {
-            event(new Registered($user));
-        } catch(Exception $e) { }
+        Event::dispatch(new Registered($user));
 
         return JWTAuth::fromUser($user);
+    }
+
+    /*
+     * @param array $data
+     * @return array;
+     */
+    private function normalizeDataCompany(array $data) :array {
+        $remove = ['zip_code', 'email', 'password'];
+        return array_diff_key($data, array_flip($remove));
+    }
+
+    /*
+    * @param Company $company
+    * @param array $data
+    * @return array;
+    */
+    private function normalizeDataBranch(Company $company, array $data) :array {
+        $remove = ['email', 'password', 'taxpayer_id'];
+        $data = array_diff_key($data, array_flip($remove));
+        $extra = [
+            'company_id' => $company->id,
+            'name' => 'matriz',
+            'user_id' => null,
+        ];
+        return array_merge($data, $extra);
+    }
+
+    /*
+    * @param Company $company
+    * @param array $data
+    * @return array;
+    */
+    private function normalizeDataUser(Company $company, array $data) :array {
+        $remove = ['taxpayer_id', 'zip_code'];
+        $data = array_diff_key($data, array_flip($remove));
+        $extra = [
+            'company_id' => $company->id,
+            'role' => User::ROLE_USER,
+            'user_id' => null,
+        ];
+        return array_merge($data, $extra);
     }
 
 }
