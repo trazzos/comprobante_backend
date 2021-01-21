@@ -31,8 +31,9 @@ class ResendVerificationController extends Controller{
      * @return JsonResponse
      */
     public function __invoke(Request $request) : JsonResponse {
-        $response = $this->authVerifyService->resend($request);
-        return $this->handleAjaxJsonResponse($response[0], $response[1]);
+        $user = $request->user();
+        $message = $this->authVerifyService->resend($user);
+        return $this->handleAjaxJsonResponse($user, $message);
     }
 
 }

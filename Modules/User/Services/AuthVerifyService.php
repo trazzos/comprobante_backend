@@ -9,30 +9,26 @@ use Modules\User\Models\User;
  * Class GetUserService
  * @package Modules\User\Services
  */
-class AuthVerifyService extends GetUserService {
+class AuthVerifyService {
 
     /**
      * Mark the authenticated user's email address as verified.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return Mixed
+     * @param  User $user
+     * @return String
      */
-    public function verify(Request $request) {
-        $user = $this->info($request->route('id'));
-        $message =  $this->handleVerify($user);
-        return [$user, $message];
+    public function verify(User $user) : string {
+       return $this->handleVerify($user);
     }
 
     /**
      * Resend the email verification notification.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return Mixed
+     * @param  User $user
+     * @return String
      */
-    public function resend(Request $request) {
-        $user = $request->user();
-        $message =  $this->handleResend($user);
-        return [$user, $message];
+    public function resend(User $user) : string {
+        return  $this->handleResend($user);
     }
 
     /**

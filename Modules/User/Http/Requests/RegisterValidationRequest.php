@@ -28,7 +28,7 @@ class RegisterValidationRequest extends Request {
             'zip_code' => 'string|min:5|max:5|required',
             'email' => 'required|email|unique:user,email',
             'password' => 'string|required|confirmed',
-
+            'accept_term_condition' => 'required|boolean',
         ];
     }
 }
