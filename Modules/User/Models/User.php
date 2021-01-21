@@ -59,13 +59,6 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     ];
 
     /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $fillable = [];
-
-    /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
      * @return mixed

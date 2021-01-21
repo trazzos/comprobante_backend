@@ -9,20 +9,19 @@ use Illuminate\Http\Request;
 
 
 
-class VerificationController extends Controller{
-
+class ResendVerificationController extends Controller{
     /**
      * @var AuthVerifyService $authVerifyService
      */
     private AuthVerifyService $authVerifyService;
 
     /**
-     * VerificationController Construct
+     * ResendVerificationController Construct
      * @param AuthVerifyService $authVerifyService
      * @return void
      */
     public function __construct(AuthVerifyService $authVerifyService) {
-        $this->middleware('signed');
+        $this->middleware('auth');
         $this->middleware('throttle:6,1');
         $this->authVerifyService = $authVerifyService;
     }
@@ -32,7 +31,7 @@ class VerificationController extends Controller{
      * @return JsonResponse
      */
     public function __invoke(Request $request) : JsonResponse {
-        $response = $this->authVerifyService->verify($request);
+        $response = $this->authVerifyService->resend($request);
         return $this->handleAjaxJsonResponse($response[0], $response[1]);
     }
 
