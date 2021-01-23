@@ -25,7 +25,7 @@ class Company extends Model {
      *
      * @var array
      */
-    protected $guarded = [];
+    protected $guarded = ['id'];
 
     public function branch() {
         return $this->hasMany('\Modules\Branch\Models\Branch');

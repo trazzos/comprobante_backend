@@ -24,7 +24,7 @@ class Branch extends Model {
      *
      * @var array
      */
-    protected $guarded = [];
+    protected $guarded = ['id'];
 
     public function company() {
         return $this->belongsTo('\Modules\Company\Models\Company');

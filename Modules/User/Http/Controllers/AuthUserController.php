@@ -2,10 +2,12 @@
 
 namespace Modules\User\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\User\Services\GetUserService;
 use Auth;
+use Psy\Util\Json;
 
 /**
  * Class AuthUserController
@@ -13,13 +15,14 @@ use Auth;
  */
 class AuthUserController extends Controller {
     /**
-     * @var GetUserService
+     * @var GetUserService $getUserService
      */
-    private $getUserService;
+    private GetUserService $getUserService;
 
     /**
-     * AuthUserController constructor.
+     * AuthUserController Construct.
      * @param GetUserService $getUserService
+     * @return void
      */
     public function __construct(GetUserService $getUserService) {
         $this->getUserService = $getUserService;
@@ -29,7 +32,7 @@ class AuthUserController extends Controller {
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function __invoke(Request $request) {
+    public function __invoke(Request $request) : JsonResponse {
         $response = $this->getUserService->info(Auth::user()->id);
 
         return $this->handleAjaxJsonResponse($response);

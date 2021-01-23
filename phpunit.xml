@@ -12,11 +12,21 @@
          stopOnFailure="false">
     <testsuites>
         <testsuite name="Unit">
-            <directory suffix="Test.php">./tests/Unit</directory>
+            <directory>./Modules/*/Tests/Unit</directory>
+            <directory>./Modules/*/*/Tests/Unit</directory>
+            <directory>./Modules/*/*/*/Tests/Unit</directory>
+            <directory>./Modules/*/*/*/*/Tests/Unit</directory>
+            <directory>./Modules/*/*/*/*/*/Tests/Unit</directory>
+            <directory>./Modules/*/*/*/*/*/*/Tests/Unit</directory>
         </testsuite>
 
-        <testsuite name="Feature">
-            <directory suffix="Test.php">./tests/Feature</directory>
+        <testsuite name="Integration">
+            <directory>./Modules/*/Tests/Integration</directory>
+            <directory>./Modules/*/*/Tests/Integration</directory>
+            <directory>./Modules/*/*/*/Tests/Integration</directory>
+            <directory>./Modules/*/*/*/*/Tests/Integration</directory>
+            <directory>./Modules/*/*/*/*/*/Tests/Integration</directory>
+            <directory>./Modules/*/*/*/*/*/*/Tests/Integration</directory>
         </testsuite>
     </testsuites>
     <filter>

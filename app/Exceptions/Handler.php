@@ -4,6 +4,9 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Response;
+use Modules\Api\Exceptions\Interfaces\ApiExceptionInterface;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -50,6 +53,19 @@ class Handler extends ExceptionHandler
      */
     public function render($request, \Throwable $e)
     {
+        //API request. Overriding exceptions, we want to return a json response for all these cases
+        if($request->is('api/*')) {
+            //if(!($e instanceof ApiExceptionInterface)) {
+                //$errorMessage = config('app.debug') ? $e->getMessage() : trans('api::api.exceptions.serverError');
+                $errorMessage = $e->getMessage();
+                $e = new HttpException(Response::HTTP_INTERNAL_SERVER_ERROR, $errorMessage, null, [], Response::HTTP_INTERNAL_SERVER_ERROR);
+            //}
+
+            //$apiResponse = ApiReply::fail($e);
+
+            return response()->json($e->getMessage(), $e->getCode(), [], JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
+        }
+
         return parent::render($request, $e);
     }
 }

@@ -2,12 +2,14 @@
 
 namespace Modules\User\Models;
 
+use Hash;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Notifications\VerifyEmail;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject
+class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 {
     use Notifiable;
 
@@ -32,10 +34,10 @@ class User extends Authenticatable implements JWTSubject
      * The attributes that are protected.
      *
      * @var array
-     * No queremos que el campo id pueda ser cambiado por lo que lo agregamos al arreglo de guarded
+     *
      */
     protected $guarded = [
-        'id'
+        'id',
     ];
 
     /**
@@ -65,6 +67,13 @@ class User extends Authenticatable implements JWTSubject
         return $this->getKey();
     }
 
+    /*
+     *
+     */
+    public function setPasswordAttribute($value) {
+        $this->attributes['password'] = Hash::make($value);
+    }
+
     /**
      * Return a key value array, containing any custom claims to be added to the JWT.
      *
@@ -81,4 +90,9 @@ class User extends Authenticatable implements JWTSubject
     public function company() {
         return $this->belongsTo('\Modules\Company\Models\Company');
     }
+
+    public function sendEmailVerificationNotification() {
+        $this->notify(new VerifyEmail());
+    }
+
 }
