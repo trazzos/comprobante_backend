@@ -8,6 +8,8 @@ use Modules\User\Models\User;
 /**
  * Class GetUserService
  * @package Modules\User\Services
+ * TODO esta clase esta rompiendo el Single Responsibility Principle ya que esta encargada de verificar y tambien de reenviar
+ * como esta pequeña aun pues lo dejaremos pasar por lo pronto.
  */
 class AuthVerifyService {
 

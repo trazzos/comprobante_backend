@@ -26,11 +26,14 @@ Route::prefix('auth')->name('auth.')->group(function() {
     Route::middleware('jwt.auth')->group(function() {
         Route::get('user', 'AuthUserController')->name('user');
         Route::post('logout', 'AuthLogoutController')->name('logout');
-        Route::post('email/resend', 'ResendVerificationController')->name('resend');
+
+        Route::middleware('throttle:6,1')->group(function() {
+            Route::post('email/resend', 'ResendVerificationController')->name('resend');
+            Route::post('email/verify', 'VerificationController')->name('verify');
+        });
     });
     Route::middleware('jwt.refresh')->group(function () {
         Route::get('refresh', 'AuthRefreshController')->name('refresh');
     });
 
-    Route::post('email/verify/{id}', 'VerificationController')->name('verify');
 });

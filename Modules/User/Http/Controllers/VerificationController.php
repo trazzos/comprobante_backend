@@ -4,9 +4,8 @@
 namespace Modules\User\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
+use Modules\User\Http\Requests\VerificationValidationRequest;
 use Modules\User\Services\AuthVerifyService;
-use Illuminate\Http\Request;
-use Modules\User\Services\GetUserService;
 
 
 class VerificationController extends Controller{
@@ -17,29 +16,22 @@ class VerificationController extends Controller{
     private AuthVerifyService $authVerifyService;
 
     /**
-     * @var GetUserService $getUserService
-     */
-    private GetUserService $getUserService;
-
-    /**
      * VerificationController Construct
      * @param AuthVerifyService $authVerifyService
      * @return void
      */
-    public function __construct(AuthVerifyService $authVerifyService, GetUserService $getUserService) {
-        $this->middleware('signed');
-        $this->middleware('throttle:6,1');
+    public function __construct(AuthVerifyService $authVerifyService) {
         $this->authVerifyService = $authVerifyService;
-        $this->getUserService = $getUserService;
     }
 
     /**
-     * @param Request $request
+     * @param VerificationValidationRequest $request
      * @return JsonResponse
      */
-    public function __invoke(Request $request) : JsonResponse {
-        $user = $this->getUserService->info($request->route('id'));
+    public function __invoke(VerificationValidationRequest $request) : JsonResponse {
+        $user = $request['requestedUser'];
         $message = $this->authVerifyService->verify($user);
+        //TODO es necesario enviar todo el usuario de vuelta? o solo el mensaje?
         return $this->handleAjaxJsonResponse($user, $message);
     }
 

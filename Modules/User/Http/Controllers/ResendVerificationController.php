@@ -1,13 +1,10 @@
 <?php
 
-
 namespace Modules\User\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
+use Modules\User\Http\Requests\VerificationValidationRequest;
 use Modules\User\Services\AuthVerifyService;
-use Illuminate\Http\Request;
-
-
 
 class ResendVerificationController extends Controller{
     /**
@@ -21,17 +18,17 @@ class ResendVerificationController extends Controller{
      * @return void
      */
     public function __construct(AuthVerifyService $authVerifyService) {
-        $this->middleware('auth');
-        $this->middleware('throttle:6,1');
         $this->authVerifyService = $authVerifyService;
     }
 
     /**
-     * @param Request $request
+     * @param VerificationValidationRequest $request
      * @return JsonResponse
      */
-    public function __invoke(Request $request) : JsonResponse {
-        $user = $request->user();
+    public function __invoke(VerificationValidationRequest $request) : JsonResponse {
+        //Aqui usariamos nuestro requested user que agregamos al $request en el validation request
+        $user = $request['requestedUser'];
+        //TODO esta ruta esta enviando un error 530 de SMTP (Actualizar .env)
         $message = $this->authVerifyService->resend($user);
         return $this->handleAjaxJsonResponse($user, $message);
     }
